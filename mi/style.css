@@ -1,0 +1,1106 @@
+/* 版心 */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f3f5f7;
+    height: 2000px;
+    font-family: Helvetica Neue, Helvetica, Arial, Microsoft Yahei, Hiragino Sans GB, Heiti SC, WenQuanYi Micro Hei, sans-serif;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+
+/* 整个头部 */
+
+.header {
+    width: 100%;
+    height: 40px;
+    background-color: #333;
+    font-size: 12px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.wrap {
+    position: relative;
+    width: 1226px;
+    /* wrap水平居中 */
+    margin: 0 auto;
+    /* background-color: #333; */
+    /* 不用设高度 因为整个网站都用到它 高度只需要随内容撑开 */
+}
+
+
+/* 左右两边的span都设置margin */
+
+.header ul li a {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    /* a的颜色不能继承header 需要再设置一下 */
+    color: #b0b0b0;
+    font-family: Helvetica;
+    text-align: center;
+}
+
+.header ul li span {
+    margin: 0 7px;
+    color: #424242;
+}
+
+.header ul li:hover a {
+    color: #fff;
+}
+
+
+/* 设置两边分别浮动 左浮和右浮*/
+
+.header-left {
+    float: left;
+}
+
+.header-right {
+    position: relative;
+    float: right;
+}
+
+
+/* 在设置两边的li分别浮动 注意这里都是左浮 */
+
+.header-left ul li {
+    /* 后面下载app用到绝对位置 */
+    position: relative;
+    float: left;
+}
+
+.header-right ul li {
+    /* 这里要是设置成right的话，会反过来显示 */
+    float: left;
+}
+
+.header-right ul li:last-child {
+    /* 作为购物侧悬停栏的父元素 使用相对定位 */
+    position: relative;
+    width: 120px;
+    height: 40px;
+    margin-left: 25px;
+    text-align: center;
+    line-height: 40px;
+    /* 购物车颜色 */
+    background: #424242;
+    transition: all .2s;
+}
+
+
+/* 设置图标大小 用字体大小就可 */
+
+.header-right ul li:last-child .iconfont {
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 2px;
+}
+
+.header-right ul li:last-child:hover {
+    background-color: #fff;
+    cursor: pointer;
+    /* ！注意 在这里设置字体颜色是没用的要给a设置 
+    因为字体颜色是a的  a不能继承li:last-child的*/
+}
+
+
+/* 这里不能把a放在hover前面 因为这样只能是鼠标放在a上面时才变色 */
+
+.header-right ul li:last-child:hover a {
+    color: #ff6700;
+}
+
+
+/* 购物车悬停 */
+
+.cart-list {
+    /* 子绝父相 */
+    display: none;
+}
+
+@keyframes move {
+    /* <!-- 开始状态 --> */
+    0% {
+        height: 0px;
+        line-height: 0px;
+    }
+    /* <!-- 结束状态 --> */
+    100% {
+        height: 100px;
+        line-height: 100px;
+    }
+}
+
+.header-right ul li:last-child:hover>.cart-list {
+    /* display不能过渡 */
+    /* display: block; */
+    /* 可以设置行高 由0变大 */
+    position: absolute;
+    display: block;
+    width: 316px;
+    /* 使右侧对其 要用到绝对位置 */
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    color: #424242;
+    /* display: none; */
+    transition: all .3s;
+    animation-name: move;
+    animation-fill-mode: forwards;
+    /* 持续时间 */
+    animation-duration: 0.3s;
+    z-index: 30;
+}
+
+
+/* 下载app二维码 */
+
+.download {
+    position: absolute;
+    width: 124px;
+    /* height: 148px; */
+    height: 0;
+    top: 40px;
+    left: -50%;
+    /* margin-left: -62px; */
+    background-color: #fff;
+    box-shadow: 0 1px 5px #aaa;
+    overflow: hidden;
+    transition: all .3s;
+    z-index: 300;
+}
+
+.download a img {
+    width: 90px;
+    margin: 18px 0 0 0;
+}
+
+.download a p {
+    font-size: 14px;
+    line-height: 14px;
+    color: #333;
+}
+
+
+/* 选中所有li 但只对包含.download的li生效 */
+
+
+/* 这里ul一定不能掉！ */
+
+.header-left ul>li:hover>.download {
+    height: 148px;
+}
+
+
+/* 三角形 */
+
+.triangle {
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    margin: -8px 0 0px 16px;
+    /* border-top: 8px solid red; */
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #fff;
+    border-left: 8px solid transparent;
+    /* 不显示 */
+    display: none;
+}
+
+.header-left ul>li:hover>.triangle {
+    display: block;
+}
+
+
+/* header结束 */
+
+
+/* row-nav开始 */
+
+.row-nav {
+    width: 100%;
+    height: 100px;
+    /* background-color: #ffa;、 */
+}
+
+.logo {
+    position: absolute;
+    float: left;
+    width: 62px;
+    height: 56px;
+    margin-top: 22px;
+    /* background-color: #bfa; */
+}
+
+.logo img {
+    /* width: 62px; */
+    height: 56px;
+}
+
+.nav-row {
+    float: left;
+    width: 868px;
+    height: 100px;
+    margin-left: 62px;
+    /* background-color: #aff; */
+}
+
+.nav-row>ul {
+    margin-left: 172px;
+}
+
+.nav-row>ul>li {
+    float: left;
+    padding: 38px 10px;
+}
+
+.nav-row>ul>li>a:hover {
+    color: #ff6700;
+}
+
+.search {
+    float: left;
+    height: 50px;
+    width: 296px;
+    margin-top: 25px;
+    /* background-color: pink; */
+    transition: all 0.3s;
+}
+
+.search input {
+    float: left;
+    width: 245px;
+    height: 50px;
+    border: 1px solid #e0e0e0;
+    padding: 0 10px;
+    box-sizing: border-box;
+    /* 去掉input黑框 */
+    outline: none;
+    transition: all 0.3s;
+}
+
+
+/* 鼠标悬浮 都变色 */
+
+.search input:hover,
+.search input:hover+button {
+    border-color: #b0b0b0;
+}
+
+
+/* 鼠标点击 input和button边框都变色 */
+
+.search input:focus,
+.search input:focus+button {
+    border-color: #ff6700;
+}
+
+
+/*搜索框开始*/
+
+.search-list {
+    width: 245px;
+    height: 241px;
+    border: 1px solid #ff6700;
+    border-top: none;
+    position: absolute;
+    top: 76px;
+    z-index: 300;
+    box-sizing: border-box;
+    display: none;
+    background-color: #fff;
+}
+
+.search>input:focus~.search-list {
+    display: block;
+}
+
+.search-list a {
+    width: 242px;
+    height: 30px;
+    font-size: 12px;
+    background-color: #fff;
+    padding: 6px 15px;
+    box-sizing: border-box;
+    display: block;
+}
+
+.search-list a:hover {
+    color: #000000;
+    background-color: rgb(245, 245, 245);
+}
+
+
+/*搜索框结束*/
+
+button {
+    float: left;
+    border: 1px solid #e0e0e0;
+    /* 去掉左边框 因为和search input 的右边框重了 */
+    border-left: none;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    box-sizing: border-box;
+    transition: all 0.3s;
+}
+
+
+/* 在.iconfont上面设置图标大小 */
+
+button a .iconfont {
+    font-size: 28px;
+    color: #616161;
+}
+
+button:hover {
+    background-color: #ff6700;
+}
+
+button:hover a .iconfont {
+    color: #fff;
+}
+
+
+/* 中间部分 */
+
+.banner .wrap {
+    height: 460px;
+    /* background-color: pink; */
+    background-image: url(img/lunbo1.webp);
+    animation: banner 20s linear infinite;
+    background-size: 100%;
+    /* transition: all 0.3s; */
+}
+
+.banner>.wrap {
+    position: relative;
+}
+
+
+/* 鼠标一放上来就停止 */
+
+.banner .wrap:hover {
+    animation-play-state: paused;
+}
+
+
+/*定义图片切换动画*/
+
+@keyframes banner {
+    0% {
+        background-image: url(img/lunbo1.webp);
+    }
+    25% {
+        background-image: url(img/lunbo2.webp);
+    }
+    50% {
+        background-image: url(img/lunbo3.webp);
+    }
+    75% {
+        background-image: url(img/lunbo4.webp);
+    }
+    100% {
+        background-image: url(img/lunbo5.jpg);
+    }
+}
+
+
+/* 左右切换箭头 */
+
+.prev,
+.next {
+    width: 41px;
+    height: 69px;
+    position: absolute;
+    top: 50%;
+    /*垂直居中*/
+    margin-top: -34.5px;
+    /*垂直居中*/
+    background-image: url(img/icon-slides.png);
+    cursor: pointer;
+    z-index: 80px;
+}
+
+.prev {
+    left: 234px;
+    background-position: -83px;
+    /*41*2+1*/
+}
+
+.prev:hover {
+    background-position: 0;
+}
+
+.next {
+    right: 0;
+    background-position: -124px;
+}
+
+.next:hover {
+    background-position: -42px;
+}
+
+
+/* 左侧滑动导航栏 */
+
+.slide {
+    width: 234px;
+    height: 460px;
+    left: 0;
+    top: 0;
+    /* 黑色半透明 */
+    background-color: rgba(105, 101, 101, .6);
+}
+
+.slide ul {
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+
+.slide ul li {
+    height: 42px;
+    /* 上下居中 */
+    line-height: 42px;
+    padding: 0 20px 0 30px;
+}
+
+
+/* 过渡 */
+
+.slide ul li {
+    transform: all 2s;
+}
+
+
+/* 将a和右边的大于号 设置成block  成为一个整体*/
+
+.slide ul li a {
+    display: block;
+}
+
+.slide ul li:hover {
+    background-color: #ff6700;
+}
+
+
+/* a是行内元素 没有高度 */
+
+.slide ul li a {
+    font-size: 14px;
+    color: #fff;
+}
+
+.slide ul li a em {
+    /* 下面两行都能达到效果 */
+    float: right;
+    /* 但是下面这一种在左边字比较多的时候 >显示不出来 */
+    /* margin-left: 70px; */
+    font-size: 18px;
+}
+
+.adv {
+    height: 170px;
+    margin: 14px 0 26px;
+}
+
+.adv-aside {
+    float: left;
+    width: 234px;
+    height: 170px;
+    padding: 3px;
+    background-color: #5f5750;
+    box-sizing: border-box;
+}
+
+.adv-aside ul {
+    position: relative;
+    float: left;
+    width: 76px;
+    height: 82px;
+}
+
+.adv-aside li {
+    float: left;
+    width: 76px;
+    height: 82px;
+    padding: 3px 0;
+    transition: all .2s;
+}
+
+.adv-aside li:hover a {
+    opacity: 1;
+}
+
+.adv-aside li a {
+    display: block;
+    font-size: 12px;
+    color: #fff;
+    opacity: .7;
+}
+
+.adv-aside ul li img {
+    display: block;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    margin-top: -15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-12px, -12px);
+}
+
+.adv-aside ul li span {
+    /* position: absolute; */
+    display: block;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.adv-img {
+    float: left;
+    width: 992px;
+    height: 170px;
+}
+
+.adv-img ul li {
+    float: left;
+    margin-left: 14.6px;
+    width: 316px;
+    height: 170px;
+    transition: all .2s linear;
+}
+
+.adv-img ul li img {
+    width: 100%;
+}
+
+.adv-img ul li:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+}
+
+
+/*主体开始*/
+
+.container {
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 4px 0 12px;
+}
+
+
+/*手机样式开始*/
+
+.home-banner-box {
+    width: 100%;
+    height: 120px;
+    margin: 10px 0;
+}
+
+.home-banner-box a {
+    margin-top: 20px;
+    height: 120px;
+}
+
+.home-banner-box img {
+    height: 120px;
+}
+
+.container h2 {
+    color: #333;
+    font-size: 22px;
+    font-weight: normal;
+    text-align: left;
+    line-height: 58px;
+}
+
+.more {
+    float: right;
+    color: grey;
+    font-size: 16px;
+    bottom: 180px;
+}
+
+.more:hover {
+    color: #FF6700;
+}
+
+.more i {
+    font-size: 20px;
+}
+
+.home-box {
+    width: 100%;
+    height: 614px;
+}
+
+.home-box-left {
+    width: 234px;
+    height: 614px;
+    float: left;
+    background-color: #fff;
+    transition: all .2s linear;
+}
+
+.home-box-left:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+    transform: translateY(-2px);
+}
+
+.home-box-left img {
+    height: 614px;
+}
+
+.home-box-right {
+    width: 992px;
+    height: 614px;
+    float: left;
+}
+
+.items {
+    width: 234px;
+    height: 300px;
+    background-color: #fff;
+    float: left;
+    margin-bottom: 14px;
+    margin-left: 14px;
+    transition: all .2s linear;
+}
+
+.items:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+    transform: translateY(-2px);
+}
+
+.items img {
+    width: 160px;
+    height: 160px;
+    padding-top: 20px;
+    padding-bottom: 18px;
+    padding-left: 37px;
+}
+
+
+/* 第一个p标签 */
+
+.items .name {
+    width: 214px;
+    height: 21px;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+    /*文本水平居中*/
+    margin: 0 auto;
+    /*元素水平居中*/
+    margin-bottom: 2px;
+    white-space: nowrap;
+    /*禁止自动换行*/
+    overflow: hidden;
+    color: #333333;
+    /* background-color: #ffa; */
+    text-overflow: ellipsis;
+    /*溢出文本显示省略号*/
+}
+
+.items p {
+    width: 214px;
+    height: 18px;
+    line-height: 18px;
+    margin: 0 auto;
+    text-align: center;
+    /*文本水平居中*/
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: #b0b0b0;
+    white-space: nowrap;
+    /*禁止自动换行*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*溢出文本显示省略号*/
+}
+
+.items span {
+    color: #FF6700;
+    font-size: 14px;
+    text-align: center;
+    /*文本水平居中*/
+    display: block;
+}
+
+.items span del {
+    color: #b0b0b0;
+    margin-left: 7px;
+}
+
+
+/*手机样式结束*/
+
+
+/*家电样式开始*/
+
+.ele {
+    margin: 38px auto;
+}
+
+.home-box-left1 {
+    width: 234px;
+    height: 614px;
+    float: left;
+    background-color: #fff;
+    transition: all .2s linear;
+}
+
+.home-box-left1 .items1 {
+    margin-left: 0;
+    width: 234px;
+    height: 300px;
+    background-color: #fff;
+    float: left;
+    margin-bottom: 14px;
+    transition: all .2s linear;
+}
+
+.items1:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+    transform: translateY(-2px);
+}
+
+.home-box-left1 .items1 img {
+    width: 234px;
+}
+
+.last-items {
+    width: 234px;
+    height: 143px;
+    background-color: #fff;
+    float: left;
+    margin-bottom: 14px;
+    margin-left: 14px;
+    transition: all .2s linear;
+}
+
+.last-items:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+    transform: translateY(-2px);
+}
+
+.text-items {
+    width: 94px;
+    float: left;
+    margin-left: 30px;
+    margin-top: 40px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.text-items>p:last-child {
+    font-size: 12px;
+    color: #FF6700;
+    margin-top: 5px;
+}
+
+.right-img {
+    width: 80px;
+    float: right;
+    margin: 32px 20px 0 0;
+}
+
+
+/*家电样式结束*/
+
+
+/*视频样式开始*/
+
+.video {
+    height: 500px;
+}
+
+.video-items {
+    width: 296px;
+    height: 285px;
+    background-color: rgb(255, 255, 255);
+    float: left;
+    margin-bottom: 14px;
+    margin-right: 14px;
+    transition: all .2s linear;
+}
+
+.video-items:last-child {
+    margin-right: 0;
+}
+
+.video-img {
+    width: 100%;
+    height: 180px;
+    background-color: red;
+    position: relative;
+    transition: all .2s linear;
+}
+
+.video-img img {
+    width: 100%;
+    height: 180px;
+}
+
+.video-items p {
+    width: 268px;
+    height: 21px;
+    text-align: center;
+    font-size: 14px;
+    /* background-color: pink; */
+    margin: 28px auto 6px;
+    white-space: nowrap;
+    /*禁止自动换行*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*溢出文本显示省略号*/
+}
+
+.video-items i {
+    position: absolute;
+    top: 125px;
+    left: 12px;
+    font-size: 40px;
+}
+
+.video-items:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+    transform: translateY(-2px);
+}
+
+.video-img:hover i {
+    color: #FF6700;
+}
+
+
+/*视频样式结束*/
+
+
+/*主体结束*/
+
+
+/*页脚开始*/
+
+.site-footer {
+    width: 100%;
+    height: 332px;
+    background-color: #fff;
+}
+
+.site-info {
+    width: 100%;
+    height: 206px;
+    padding: 30px 0;
+}
+
+.footer-service {
+    width: 100%;
+    height: 25px;
+    padding: 27px 0;
+    /*上下27  左右0*/
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.footer-service div {
+    float: left;
+    width: 19.8%;
+    height: 25px;
+    line-height: 25px;
+    border-right: 1px solid #e0e0e0;
+    text-align: center;
+    font-size: 16px;
+}
+
+.footer-service div:last-child {
+    border-right: none;
+}
+
+.footer-service a {
+    transition: all .2s linear;
+}
+
+.footer-service a:hover {
+    color: #FF6700;
+}
+
+.footer-service li {
+    font-size: 30px;
+}
+
+.footer-links {
+    width: 100%;
+    height: 172px;
+    padding: 40px 0;
+    font-size: 14px;
+    color: #424242;
+}
+
+.footer-links ul {
+    float: left;
+    width: 160px;
+    text-align: left;
+}
+
+.footer-links a {
+    color: #757575;
+    font-size: 12px;
+}
+
+.footer-links a:hover {
+    color: #FF6700;
+}
+
+.footer-links li {
+    height: 18px;
+    line-height: 18px;
+    margin-top: 10px;
+}
+
+.footer-links ul li:nth-child(1) {
+    margin-bottom: 26px;
+}
+
+.contact {
+    width: 251px;
+    height: 111px;
+    border-left: 1px solid #e0e0e0;
+    float: right;
+}
+
+.contact1 {
+    color: #FF6700;
+    font-size: 22px;
+    line-height: 22px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.contact2 {
+    color: #616161;
+    font-size: 12px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.contact>a {
+    width: 118px;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #FF6700;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    color: #FF6700;
+    transition: all .4s;
+}
+
+.contact>a:hover {
+    background-color: #FF6700;
+    color: #fff;
+}
+
+.contact3 {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #616161;
+    text-align: center;
+    position: relative;
+}
+
+.contact3>span {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    /*设置成行内块既能*/
+    background-size: 110%;
+    position: relative;
+    /*相对于自己移动*/
+    top: 5px;
+}
+
+.contact3 span {
+    font-size: 20px;
+    padding-left: 5px;
+}
+
+.contact3 span:hover {
+    color: #FF6700;
+}
+
+.contact3 img {
+    width: 126px;
+    position: absolute;
+    top: 40px;
+    left: 100px;
+    display: none;
+}
+
+.wx:hover+img {
+    display: block;
+}
+
+.footer-logo {
+    width: 56px;
+    height: 56px;
+    margin-right: 10px;
+    float: left;
+}
+
+.footer-logo img {
+    width: 100%;
+}
+
+.sites {
+    width: 1160px;
+    height: 200px;
+    float: left;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.sites a:hover {
+    color: #FF6700;
+}
+
+.part1 a {
+    color: #757575;
+}
+
+.part2 a {
+    color: #b0b0b0;
+}
+
+.part2 span {
+    color: #b0b0b0;
+}
+
+.part3 img {
+    height: 28px;
+}
+
+.slogan2020 {
+    margin: 0 auto;
+    display: block;
+}
+
+
+/*页脚结束*/
+
+
+/*样式结束*/
